@@ -11,13 +11,13 @@ class Cms_Controller_User_Login extends Cms_Controller_Application
   
   public function action_index()
   {
-    $this->view->form = Forms::get('user_login');
+    $this->_view->form = Forms::get('login', 'user', 'user');
   }
   
   public function action_logout()
   {
     Authlite::instance()->logout(FALSE);
-    Linker::redirect();
+    Request::redirect_initial('');
   }
   
   public function action_forgotten_password()
@@ -25,7 +25,7 @@ class Cms_Controller_User_Login extends Cms_Controller_Application
     Navigation::remove_last();
     Navigation::add('Obnovení hesla', Request::initial_url());
     
-    $this->view->form = Forms::get('user_password_forgotten_link');
+    $this->_view->form = Forms::get('forgotten_password_link', 'user', 'user');
   }
   
   public function action_forgotten_password_change()
@@ -38,21 +38,26 @@ class Cms_Controller_User_Login extends Cms_Controller_Application
     $show = FALSE;
     
     if (strlen($hash)) {
-      if ($hash == 'hotovo') {
-        $show = TRUE;
-        $this->view->sent = TRUE;
-      }
-      else {
-        $user = ORM::factory('user')->where('change_password_hash', '=', $hash)->find();
+      $user = ORM::factory('user')->where('change_password_hash', '=', $hash)->find();
+      
+      if ($user->change_password_timestamp >= time()) {
+        $password = strtolower(text::random('alnum', 8));
         
-        if ($user->change_password_timestamp >= time()) {
-          $show = TRUE;
-          $this->view->form = Forms::get('user_password_forgotten_change', 'user', $user->id);
-        }
+        $user->password = $password;
+        $user->save();
+        
+        $email = Email::factory(Kohana::$config->load('email.types.user_forgotten_password_change'));
+        $email->view->set('user', $user);
+        $email->view->set('password', $password);
+        $email->to($user->email);
+        $email->render_view();
+        $email->send();
+        
+        $show = TRUE;
       }
     }
     
     if ( ! $show)
-      $this->request->redirect(Route::url('user_forgotten_password_link', array (), TRUE));
+      Request::redirect_initial(Route::get('user_forgotten_password')->uri());
   }
 }

@@ -22,44 +22,51 @@ Route::set('user', 'uzivatel')
 ));
 
 // odhlaseni
-Route::set('user_login-logout', 'odhlasit')
+Route::set('user_logout', 'odhlasit')
   ->defaults(array (
-    'controller' => 'login',
+    'controller' => 'user_login',
     'action' => 'logout',
 ));
 
 // zapomenute heslo - zmena hesla
 Route::set('user_forgotten_password_change', 'obnoveni-hesla/<hash>')
   ->defaults(array (
-    'controller' => 'login',
+    'controller' => 'user_login',
     'action' => 'forgotten_password_change',
 ));
 
 // zapomenute heslo - zaslani linku
-Route::set('user_forgotten_password_link', 'obnoveni-hesla-link')
+Route::set('user_forgotten_password', 'obnoveni-hesla')
   ->defaults(array (
-    'controller' => 'login',
+    'controller' => 'user_login',
     'action' => 'forgotten_password',
 ));
 
 // prihlaseni - vychozi
 Route::set('user_login', 'prihlaseni')
   ->defaults(array (
-    'controller' => 'login',
+    'controller' => 'user_login',
     'action' => 'index',
 ));
 
-// registrace uzivatele - hotovo
-Route::set('', 'registrace/hotovo')
+// overeni uzivatele
+Route::set('user_register-verify', 'registrace/overeni/<user_id>/<hash>')
   ->defaults(array (
-    'controller' => 'register',
+    'controller' => 'user_register',
+    'action' => 'verify',
+));
+
+// registrace uzivatele - hotovo
+Route::set('user_register-done', 'registrace/hotovo')
+  ->defaults(array (
+    'controller' => 'user_register',
     'action' => 'done',
 ));
 
 // registrace uzivatele - vychozi
 Route::set('user_register', 'registrace')
   ->defaults(array (
-    'controller' => 'register',
+    'controller' => 'user_register',
     'action' => 'index',
 ));
 

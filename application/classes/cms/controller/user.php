@@ -1,17 +1,17 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Cms_Controller_User extends Cms_Controller_Auth
+class Cms_Controller_User extends Cms_Controller_Builder_Template_Application_Auth
 {
   public function before()
   {
     parent::before();
     
-    Navigation::add('Uživatelská zóna', Linker::get('uzivatel'));
+    Navigation::add('Uživatelská zóna', Route::url('user'));
   }
   
   public function action_index()
   {
-    Linker::redirect(Route::get('user_orders')->uri());
+    Request::redirect_initial(Route::get('user-edit')->uri());
   }
   
   /**
@@ -21,13 +21,18 @@ class Cms_Controller_User extends Cms_Controller_Auth
   {
     Navigation::add('Editace údajů', Route::get('user-edit')->uri());
     
-    $this->view->form = Forms::get('user_edit', 'user', $this->_user->id);
+    $this->_view->form = Forms::get('edit', 'user', 'user', $this->_user->id);
   }
   
   public function action_change_password()
   {
     Navigation::add('Změna hesla', Route::get('user-change_password')->uri());
     
-    $this->view->form = Forms::get('user_password_change', 'user', $this->_user->id);
+    $this->_view->form = Forms::get('change_password', 'user', 'user', $this->_user->id);
+  }
+  
+  public function action_block_login_box()
+  {
+    $this->_view->user = Authlite::instance()->get_user();
   }
 }

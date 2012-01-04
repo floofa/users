@@ -60,7 +60,7 @@ return array
   'form_user_password_change_field_new_password_repeat' => 'Nové heslo (kontrola)',
   
   // link pro zmenu hesla
-  'form_user_password_forgotten_link_field_login_name' => 'Přihlašovací jméno',
+  'form_user_forgotten_password_link_field_login_name' => 'Přihlašovací jméno',
   
   // prihlaseni
   'form_user_login_field_login_name' => 'E-mail',

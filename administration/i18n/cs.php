@@ -28,6 +28,8 @@ return array
   'form_user_edit_field_login_name' => 'Přihlašovací jméno',
   'form_user_edit_field_password' => 'Heslo',
   
+  'form_user_filter_field_email' => 'E-mail',
+  
   /*
   'form_user_edit_heading' => 'Editace uživatele',
   'form_user_edit_group_group2' => 'Fakturační údaje',

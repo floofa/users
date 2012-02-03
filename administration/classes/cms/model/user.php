@@ -4,6 +4,8 @@ class Cms_Model_User extends ORM_Classic
 {
   protected $_sorting = array ('surname' => 'ASC', 'name' => 'ASC');
   
+  protected $_filter_as_like = array ('email');
+  
   public function set_list_item_default(&$arr, $item) 
   {
     $arr['full_name'] = $item->name . ' ' . $item->surname;

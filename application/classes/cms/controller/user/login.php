@@ -26,6 +26,12 @@ class Cms_Controller_User_Login extends Cms_Controller_Application
     Navigation::add('Obnovení hesla', Request::initial_url());
     
     $this->_view->form = Forms::get('forgotten_password_link', 'user', 'user');
+    $this->_view->sent = FALSE;
+    
+    if (Session::instance()->get('form_sent') && Session::instance()->get('form_sent') == 'form_user_forgotten_password_link') {
+      $this->_view->sent = TRUE;
+      Session::instance()->delete('form_sent');
+    }
   }
   
   public function action_forgotten_password_change()
@@ -50,7 +56,6 @@ class Cms_Controller_User_Login extends Cms_Controller_Application
         $email->view->set('user', $user);
         $email->view->set('password', $password);
         $email->to($user->email);
-        $email->render_view();
         $email->send();
         
         $show = TRUE;

@@ -3,5 +3,5 @@
 </div>
 
 <div style="padding: 20px; background-color: #ddd; margin: 0 0 25px 0; font-size: 0.75em; line-height: 1.5em;">
-  Pro zaslání nového hesla klikněte na následující odkaz: <a href="<?=Route::url('user_forgotten_password_change', array ('hash' => $user->change_password_hash))?>" style="color: #333;"><?=Route::url('user_forgotten_password_change', array ('hash' => $user->change_password_hash), TRUE)?></a>.
+  Pro zaslání nového hesla klikněte na následující odkaz: <a href="<?=Route::url('user_forgotten_password_change', array ('hash' => $user->change_password_hash), TRUE)?>" style="color: #333;"><?=Route::url('user_forgotten_password_change', array ('hash' => $user->change_password_hash), TRUE)?></a>.
 </div>

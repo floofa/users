@@ -42,8 +42,8 @@ return array
   'form_user_edit_field_phone' => 'Telefon',
   'form_user_edit_field_company_data' => 'Firemní údaje (pokud potřebujete fakturu na firmu)',
   'form_user_edit_field_company' => 'Firma',
-  'form_user_edit_field_ic' => 'IČ',
-  'form_user_edit_field_dic' => 'DIČ',
+  'form_user_edit_field_cin' => 'IČ',
+  'form_user_edit_field_tin' => 'DIČ',
   'form_user_edit_field_delivery_address' => 'Dodací adresa (pouze pokud se liší od adresy fakturační)',
   'form_user_edit_field_delivery_name' => 'Jméno',
   'form_user_edit_field_delivery_surname' => 'Příjmení',
@@ -55,15 +55,15 @@ return array
   'form_user_edit_field_delivery_phone' => 'Telefon',
   'form_user_edit_field_newsletter' => 'Souhlas se zasíláním newsletteru',
   
-  'form_user_password_change_field_actual_password' => 'Stávající heslo',
-  'form_user_password_change_field_new_password' => 'Nové heslo',
-  'form_user_password_change_field_new_password_repeat' => 'Nové heslo (kontrola)',
+  'form_user_change_password_field_old_password' => 'Současné heslo',
+  'form_user_change_password_field_new_password' => 'Nové heslo',
+  'form_user_change_password_field_new_password_repeat' => 'Nové heslo (kontrola)',
   
   // link pro zmenu hesla
   'form_user_forgotten_password_link_field_login_name' => 'Přihlašovací jméno',
   
   // prihlaseni
-  'form_user_login_field_login_name' => 'E-mail',
+  'form_user_login_field_email' => 'E-mail',
   'form_user_login_field_password' => 'Heslo',
   
   // zmena hesla
@@ -99,4 +99,12 @@ return array
   'form_purchase_personal_data_field_delivery_country' => 'Stát',
   'form_purchase_personal_data_field_delivery_phone' => 'Telefon',
   
+  'validate' => array (
+    'email' => array (
+      'is_unique' => 'Vámi zadaný e-mail je již přiřazen k jinému účtu. Zadejte prosím jiný',
+    ),
+    'old_password' => array (
+      'check_actual_password' => 'Hodnota zadaná do pole `:field` není správná',
+    ),
+  ),
 );

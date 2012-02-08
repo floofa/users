@@ -10,14 +10,14 @@
   </div>
 <?endif;?>
 
-<?=$form->attr('id', 'personal_data_form')->add_class('formBox')->open()?>
+<?=$form->open()?>
   <h2>Fakturační údaje</h2>  
   <fieldset>
     <div class="cols cols3">
       <div class="col1">
         <div class="clearfix input <?=( ! $form->name->error()) ? 'correct' : 'error'?>">
           <div class="lab help">
-            <label for="<?=$form->name->name()?>"><?=$form->name->label()?> <span>*</span></label><em></em>
+            <label for="<?=$form->name->name()?>"><?=$form->name->get('label')?> <span>*</span></label><em></em>
           </div>
           <div class="con"><?=$form->name->add_class('input')->attr(array ('tabindex' => 4))?></div>
         </div>

@@ -2,7 +2,7 @@
 
 abstract class Cms_Controller_Static_User extends Cms_Controller_Static 
 {
-  protected $folder = '_static/user';
+  protected $_folder = 'user';
   
   public function action_menu()
   {
@@ -15,17 +15,16 @@ abstract class Cms_Controller_Static_User extends Cms_Controller_Static
     if (Authlite::instance()->logged_in()) {
       $menu = new Menu('user_menu');
       
-      $menu->add('Objednávky', Route::url('user_orders'));
+      //$menu->add('Objednávky', Route::url('user_orders'));
       $menu->add('Editace údajů', Route::url('user-edit'));
       $menu->add('Změna hesla', Route::url('user-change_password'));
       
-      $uri = trim(Request::$initial->detect_uri(), '/');
-      $menu->set_actives(Linker::get($uri));
+      $menu->set_actives(Request::initial_url());
       
-      $this->view->menu = $menu;
+      $this->_view->menu = $menu;
     }
     else {
-      $this->view = View::factory('blank');
+      $this->_view = View::factory('blank');
     }
   }
 }

@@ -1,7 +1,9 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Cms_Controller_User extends Cms_Controller_Builder_Template_Application_Auth
+class Cms_Controller_User extends Controller_Builder_Template_Application_Auth
 {
+  public $page_type = 'user';
+  
   public function before()
   {
     parent::before();

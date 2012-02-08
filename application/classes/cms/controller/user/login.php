@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Cms_Controller_User_Login extends Cms_Controller_Application
+class Cms_Controller_User_Login extends Cms_Controller_Builder_Template_Application
 {
   public function before()
   {
@@ -16,7 +16,7 @@ class Cms_Controller_User_Login extends Cms_Controller_Application
   
   public function action_logout()
   {
-    Authlite::instance()->logout(FALSE);
+    Authlite::instance('authlite_user')->logout(FALSE);
     Request::redirect_initial('');
   }
   

@@ -20,17 +20,23 @@ class Cms_Model_User extends ORM
   {
     return array(
       'password' => array(
-        array(array(Authlite::instance(), 'hash'))
+        array(array(Authlite::instance('authlite_user'), 'hash'))
       )
     );
   }
   
   public function save(Validation $validation = NULL)
   {
-    if ( ! strlen($this->login_name)) {
-      $this->login_name = $this->email;
-    }
-    
     return parent::save($validation);
+  }
+  
+  public function has_company_data()
+  {
+    return (bool)(strlen($this->company));
+  }
+  
+  public function has_delivery_address()
+  {
+    return (bool)(strlen($this->delivery_name));
   }
 }
